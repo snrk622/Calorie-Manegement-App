@@ -10,11 +10,24 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var calorieLabel: UILabel!
+    
+    //segueを巻き戻したときの処理
+    @IBAction func unwindTotop(sender: UIStoryboardSegue) {
+        guard let sourceVC = sender.source as? CalorieViewController, let getCalorie = sourceVC.getCalorie else {
+            return
+        }
+        
+        self.calorieLabel.text = getCalorie
+    }
+    
+    //userDfaultsのインスタンスを取得
+    let userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
-
-
+    
 }
 
