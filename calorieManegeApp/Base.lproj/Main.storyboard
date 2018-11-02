@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StA-8P-1R7">
-                                <rect key="frame" x="273.66666666666669" y="449.66666666666669" width="31" height="21"/>
+                                <rect key="frame" x="273.66666666666669" y="447.66666666666669" width="31" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -34,13 +34,17 @@
                         <constraints>
                             <constraint firstItem="HJC-Vs-dto" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FS0-UW-k8t"/>
                             <constraint firstItem="HJC-Vs-dto" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ROs-Jf-jTe"/>
-                            <constraint firstItem="StA-8P-1R7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="12" id="cLa-Km-uNG"/>
+                            <constraint firstItem="StA-8P-1R7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="10" id="cLa-Km-uNG"/>
                             <constraint firstItem="StA-8P-1R7" firstAttribute="leading" secondItem="HJC-Vs-dto" secondAttribute="trailing" constant="10" id="utI-jc-OHl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Today's Calories" id="MjW-IX-clI">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="2zN-vL-uQ3"/>
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="2zN-vL-uQ3">
+                            <connections>
+                                <action selector="resetButtonAction:" destination="BYZ-38-t0r" id="Mwa-IB-7tG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="mrC-Jo-szD">
                             <connections>
                                 <segue destination="lJe-x4-OAu" kind="presentation" identifier="addCalorie" id="z4T-ny-kl7"/>
@@ -63,11 +67,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hBc-L8-9hY">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hBc-L8-9hY">
                                 <rect key="frame" x="116" y="138" width="162" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="light"/>
+                                <connections>
+                                    <action selector="calorieTextFieldChanged:" destination="aKh-Fl-7l1" eventType="editingChanged" id="F41-oQ-BOd"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdQ-Wp-2zM">
                                 <rect key="frame" x="283" y="148" width="31" height="21"/>
@@ -95,7 +102,11 @@
                         <viewLayoutGuide key="safeArea" id="B4D-ZE-gNj"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Calorie" id="HCc-K1-su1">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="UL3-EQ-TEL"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="UL3-EQ-TEL">
+                            <connections>
+                                <action selector="cancel:" destination="aKh-Fl-7l1" id="Xil-96-e6R"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="4jZ-c1-6A7">
                             <connections>
                                 <segue destination="ITw-nQ-pxI" kind="unwind" unwindAction="unwindTotopWithSender:" id="JsM-T4-I2v"/>
