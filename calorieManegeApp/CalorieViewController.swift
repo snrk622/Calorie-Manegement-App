@@ -9,10 +9,10 @@
 import UIKit
 
 class CalorieViewController: UIViewController {
-
-    var getCalorie: UInt16?
     
     let userDefaults = UserDefaults.standard
+
+    var getCalorie: UInt16?
     
     @IBOutlet weak var calorieTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -31,9 +31,11 @@ class CalorieViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    //calorieTextFieldの内容が変わったら
     @IBAction func calorieTextFieldChanged(_ sender: Any) {
         //calorieにcalorieTextFieldのtextを代入
         let calorie = self.calorieTextField.text ?? ""
+        
         //calorieが空じゃなかったらsaveButtonを有効にする
         self.saveButton.isEnabled = !calorie.isEmpty
     }

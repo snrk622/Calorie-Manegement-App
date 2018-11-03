@@ -18,23 +18,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StA-8P-1R7">
-                                <rect key="frame" x="273.66666666666669" y="447.66666666666669" width="31" height="21"/>
+                                <rect key="frame" x="273.66666666666669" y="397.66666666666669" width="31" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJC-Vs-dto">
-                                <rect key="frame" x="150.66666666666666" y="419.66666666666669" width="112.99999999999997" height="57"/>
+                                <rect key="frame" x="150.66666666666666" y="369.66666666666669" width="112.99999999999997" height="57"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="N6F-VH-fGM">
+                                <rect key="frame" x="120" y="477" width="174" height="2"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="N6F-VH-fGM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="100" id="7k9-9m-ide"/>
                             <constraint firstItem="HJC-Vs-dto" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FS0-UW-k8t"/>
-                            <constraint firstItem="HJC-Vs-dto" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="ROs-Jf-jTe"/>
-                            <constraint firstItem="StA-8P-1R7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="10" id="cLa-Km-uNG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="N6F-VH-fGM" secondAttribute="trailing" constant="100" id="Kjk-pt-9Yo"/>
+                            <constraint firstItem="HJC-Vs-dto" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="ROs-Jf-jTe"/>
+                            <constraint firstItem="N6F-VH-fGM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="30" id="WRV-Mc-lw6"/>
+                            <constraint firstItem="StA-8P-1R7" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="cLa-Km-uNG"/>
+                            <constraint firstItem="N6F-VH-fGM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="miD-h4-19p"/>
                             <constraint firstItem="StA-8P-1R7" firstAttribute="leading" secondItem="HJC-Vs-dto" secondAttribute="trailing" constant="10" id="utI-jc-OHl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -53,6 +60,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="calorieLabel" destination="HJC-Vs-dto" id="yBe-XV-r7n"/>
+                        <outlet property="progressBar" destination="N6F-VH-fGM" id="Wdn-Xs-ZLT"/>
+                        <outlet property="resetButton" destination="2zN-vL-uQ3" id="ADH-gx-YLa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
