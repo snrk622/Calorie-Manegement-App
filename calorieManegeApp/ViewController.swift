@@ -21,8 +21,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var calorieLabel: UILabel!
     @IBOutlet weak var resetButton: UIBarButtonItem!
     @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var goalButton: UIButton!
     
-    //segueを巻き戻したときの処理
+    
+    //CalorieViewControllerlからsegueを巻き戻したときの処理
     @IBAction func unwindTotop(sender: UIStoryboardSegue) {
         guard let sourceVC = sender.source as? CalorieViewController, let getCalorie = sourceVC.getCalorie else {
             return
@@ -41,6 +43,14 @@ class ViewController: UIViewController {
         } else {
             self.resetButton.isEnabled = true
         }
+        
+    }
+    
+    //GoalCalorieViewControllerからsegueを巻き戻したときの処理
+    @IBAction func unwindTotop2(sender: UIStoryboardSegue) {
+        
+        let goalCalorie = userDefaults.string(forKey: "goal_value")
+        self.goalButton.setTitle(goalCalorie, for: .normal)
         
     }
     
@@ -73,6 +83,7 @@ class ViewController: UIViewController {
             self.progressBar.progressTintColor = UIColor(red: 127/255, green: 255/255, blue: 191/255, alpha: 1)
             //progressBar更新
             self.progressBar.setProgress( self.progress , animated: true)
+            self.calorieLabel.textColor = UIColor.black
         })
         
         // キャンセルボタン
@@ -95,9 +106,12 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         userDefaults.register(defaults: ["calorie_value" : 0])
+        userDefaults.register(defaults: ["goal_value" : 2250])
         
         //calorieLabelにuserDefaultsを表示
         calorieLabel.text = userDefaults.string(forKey: "calorie_value")
+        
+        
         
         //progressBarの大きさ設定
         progressBar.transform = CGAffineTransform(scaleX: 1.5, y: 10)
@@ -111,11 +125,17 @@ class ViewController: UIViewController {
             self.resetButton.isEnabled = true
         }
         
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let goalCalorie = userDefaults.integer(forKey: "goal_value")
+        
         //残りのカロリー（%）を計算
-        progress = 1 - (Float(sum) / 2000)
+        progress = 1 - (Float(sum) / Float(goalCalorie))
+        let goalCalorieTitle = userDefaults.string(forKey: "goal_value")
+        self.goalButton.setTitle(goalCalorieTitle, for: .normal)
         //progressによってバーの色変更
         if progress >= 0.5 {
             progressBar.progressTintColor = UIColor(red: 127/255, green: 255/255, blue: 191/255, alpha: 1)
@@ -123,6 +143,10 @@ class ViewController: UIViewController {
             progressBar.progressTintColor = UIColor(red: 255/255, green: 191/255, blue: 127/255, alpha: 1)
         } else if progress < 0.25 {
             progressBar.progressTintColor = UIColor(red: 255/255, green: 127/255, blue: 127/255, alpha: 1)
+        }
+        
+        if sum >= 2000 {
+            calorieLabel.textColor = UIColor(red: 255/255, green: 127/255, blue: 127/255, alpha: 1)
         }
         //progressBar更新
         self.progressBar.setProgress( self.progress , animated: true)

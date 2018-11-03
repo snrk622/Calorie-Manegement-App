@@ -36,6 +36,7 @@ class CalorieViewController: UIViewController {
         //calorieにcalorieTextFieldのtextを代入
         let calorie = self.calorieTextField.text ?? ""
         
+
         //calorieが空じゃなかったらsaveButtonを有効にする
         self.saveButton.isEnabled = !calorie.isEmpty
     }
