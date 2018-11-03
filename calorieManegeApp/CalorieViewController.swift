@@ -47,6 +47,15 @@ class CalorieViewController: UIViewController {
             return
         }
         
+        func getNowClockString() -> String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            let now = Date()
+            return formatter.string(from: now)
+        }
+        
+        userDefaults.set(getNowClockString(), forKey: "time_value")
+        
         //getCalorieにcalorieTextFieldのtextを代入
         getCalorie = UInt16(calorieTextField.text!)
         

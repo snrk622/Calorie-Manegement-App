@@ -8,7 +8,20 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return timesArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // セルを取得する
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        // セルに表示する値を設定する
+        cell.textLabel!.text = timesArray[indexPath.row]
+        cell.detailTextLabel?.text = calorieArray[indexPath.row]
+        return cell
+    }
+    
     
     //userDfaultsのインスタンスを取得
     let userDefaults = UserDefaults.standard
@@ -16,12 +29,17 @@ class ViewController: UIViewController {
     var progress : Float = 0;
     let dispatchTime = DispatchTime.now() + 10
     
+    var timesArray = [String]()
+    
+    var calorieArray = [String] ()
+    
     
     
     @IBOutlet weak var calorieLabel: UILabel!
     @IBOutlet weak var resetButton: UIBarButtonItem!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var goalButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     
     //CalorieViewControllerlからsegueを巻き戻したときの処理
@@ -43,6 +61,15 @@ class ViewController: UIViewController {
         } else {
             self.resetButton.isEnabled = true
         }
+        
+        let time = userDefaults.string(forKey: "time_value")
+        timesArray.append(time!)
+        userDefaults.set(timesArray, forKey: "timesArray_value")
+        let calorieLog = "\(String(getCalorie))kcal"
+        calorieArray.append(calorieLog)
+        userDefaults.set(calorieArray, forKey: "calorieArray_value")
+        self.tableView.reloadData()
+        
         
     }
     
@@ -84,6 +111,10 @@ class ViewController: UIViewController {
             //progressBar更新
             self.progressBar.setProgress( self.progress , animated: true)
             self.calorieLabel.textColor = UIColor.black
+            
+            self.timesArray = []
+            self.calorieArray = []
+            self.tableView.reloadData()
         })
         
         // キャンセルボタン
@@ -125,7 +156,9 @@ class ViewController: UIViewController {
             self.resetButton.isEnabled = true
         }
         
-        
+        self.timesArray = self.userDefaults.stringArray(forKey: "timesArray_value")!
+        self.calorieArray = self.userDefaults.stringArray(forKey: "calorieArray_value")!
+        self.tableView.reloadData()
         
     }
     
