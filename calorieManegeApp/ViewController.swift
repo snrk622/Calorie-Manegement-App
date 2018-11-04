@@ -8,20 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return timesArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // セルを取得する
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        // セルに表示する値を設定する
-        cell.textLabel!.text = timesArray[indexPath.row]
-        cell.detailTextLabel?.text = calorieArray[indexPath.row]
-        return cell
-    }
-    
+class ViewController: UIViewController, UITableViewDelegate {
     
     //userDfaultsのインスタンスを取得
     let userDefaults = UserDefaults.standard
@@ -29,17 +16,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var progress : Float = 0;
     let dispatchTime = DispatchTime.now() + 10
     
-    var timesArray = [String]()
-    
-    var calorieArray = [String] ()
-    
     
     
     @IBOutlet weak var calorieLabel: UILabel!
     @IBOutlet weak var resetButton: UIBarButtonItem!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var goalButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
     
     
     //CalorieViewControllerlからsegueを巻き戻したときの処理
@@ -62,15 +44,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.resetButton.isEnabled = true
         }
         
-        let time = userDefaults.string(forKey: "time_value")
-        timesArray.append(time!)
-        userDefaults.set(timesArray, forKey: "timesArray_value")
-        let calorieLog = "\(String(getCalorie))kcal"
-        calorieArray.append(calorieLog)
-        userDefaults.set(calorieArray, forKey: "calorieArray_value")
-        self.tableView.reloadData()
-        
-        
+
     }
     
     //GoalCalorieViewControllerからsegueを巻き戻したときの処理
@@ -112,9 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.progressBar.setProgress( self.progress , animated: true)
             self.calorieLabel.textColor = UIColor.black
             
-            self.timesArray = []
-            self.calorieArray = []
-            self.tableView.reloadData()
+
         })
         
         // キャンセルボタン
@@ -136,13 +108,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //デフォルト値を指定
         userDefaults.register(defaults: ["calorie_value" : 0])
         userDefaults.register(defaults: ["goal_value" : 2250])
         
         //calorieLabelにuserDefaultsを表示
         calorieLabel.text = userDefaults.string(forKey: "calorie_value")
-        
-        
         
         //progressBarの大きさ設定
         progressBar.transform = CGAffineTransform(scaleX: 1.5, y: 10)
@@ -150,15 +121,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //userDefaultsをsumに読み込み
         sum = UInt16(userDefaults.integer(forKey: "calorie_value"))
         
+        //resetbuttonの設定
         if sum == 0 {
             self.resetButton.isEnabled = false
         } else {
             self.resetButton.isEnabled = true
         }
-        
-        self.timesArray = self.userDefaults.stringArray(forKey: "timesArray_value")!
-        self.calorieArray = self.userDefaults.stringArray(forKey: "calorieArray_value")!
-        self.tableView.reloadData()
         
     }
     
@@ -177,13 +145,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else if progress < 0.25 {
             progressBar.progressTintColor = UIColor(red: 255/255, green: 127/255, blue: 127/255, alpha: 1)
         }
-        
+        //文字色を変更する
         if sum >= 2000 {
             calorieLabel.textColor = UIColor(red: 255/255, green: 127/255, blue: 127/255, alpha: 1)
         }
         //progressBar更新
         self.progressBar.setProgress( self.progress , animated: true)
-        
     }
     
 }
