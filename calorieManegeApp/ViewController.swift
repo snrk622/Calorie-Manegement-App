@@ -20,12 +20,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        cell.textLabel?.textColor = UIColor.lightGray
+        cell.detailTextLabel?.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
         cell.textLabel!.text = timeArray[indexPath.row]
         cell.detailTextLabel!.text = calorieArray[indexPath.row]
+        
+        
 
         return cell
     }
+    
+    
+    
+    
     
     
     //userDfaultsのインスタンスを取得
@@ -42,6 +51,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var goalButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+//    @IBOutlet weak var cellView: UIView!
+//    @IBOutlet weak var titleLabel: UILabel!
+//    @IBOutlet weak var detailLabel: UILabel!
+    
+    
     
     
     //CalorieViewControllerlからsegueを巻き戻したときの処理
@@ -60,6 +74,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         sum = sum + getCalorie
         //userDefaultsに新しいsumを保存
         userDefaults.set(sum, forKey: "calorie_value")
+        //textColorを設定
+        calorieLabel.textColor = UIColor.white
         //calorieLabelにuserDefaultsを表示
         calorieLabel.text = userDefaults.string(forKey: "calorie_value")
         
@@ -112,6 +128,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.sum = 0
             //userDefaultsに新しいsumを保存
             self.userDefaults.set(self.sum, forKey: "calorie_value")
+            //textColorを設定
+            self.calorieLabel.textColor = UIColor.white
             //calorieLabelにuserDefaultsを表示
             self.calorieLabel.text = self.userDefaults.string(forKey: "calorie_value")
             //resetButtonを無効に
@@ -122,7 +140,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.progressBar.progressTintColor = UIColor(red: 127/255, green: 255/255, blue: 191/255, alpha: 1)
             //progressBar更新
             self.progressBar.setProgress( self.progress , animated: true)
-            self.calorieLabel.textColor = UIColor.black
             
             //それぞれの配列をリセット
             self.calorieArray = []
@@ -153,6 +170,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         
         //calorieArrayがからじゃなかったら
         if self.userDefaults.object(forKey: "calorieArray_value") != nil {
@@ -194,7 +213,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if progress >= 0.5 {
             progressBar.progressTintColor = UIColor(red: 127/255, green: 255/255, blue: 191/255, alpha: 1)
         } else if progress >= 0.25 {
-            progressBar.progressTintColor = UIColor(red: 255/255, green: 191/255, blue: 127/255, alpha: 1)
+            progressBar.progressTintColor = UIColor(red: 255/255, green: 255/255, blue: 127/255, alpha: 1)
         } else if progress < 0.25 {
             progressBar.progressTintColor = UIColor(red: 255/255, green: 127/255, blue: 127/255, alpha: 1)
         }
