@@ -8,25 +8,50 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return calorieArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell : UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        cell.textLabel!.text = timeArray[indexPath.row]
+        cell.detailTextLabel!.text = calorieArray[indexPath.row]
+
+        return cell
+    }
+    
     
     //userDfaultsのインスタンスを取得
     let userDefaults = UserDefaults.standard
     var sum: UInt16 = 0
     var progress : Float = 0;
     let dispatchTime = DispatchTime.now() + 10
-    
+    var timeArray = [String]()
+    var calorieArray = [String]()
     
     
     @IBOutlet weak var calorieLabel: UILabel!
     @IBOutlet weak var resetButton: UIBarButtonItem!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var goalButton: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     
     //CalorieViewControllerlからsegueを巻き戻したときの処理
     @IBAction func unwindTotop(sender: UIStoryboardSegue) {
-        guard let sourceVC = sender.source as? CalorieViewController, let getCalorie = sourceVC.getCalorie else {
+        //遷移元の画面を取得するためにCalorieViewControllerで型キャスト。getCalorieにCalorieViewCfontrollerのgetCalorieを代入
+        guard let sourceVC = sender.source as? CalorieViewController, let getCalorie = sourceVC.getCalorie else {//汚い
+            return
+        }
+        //遷移元の画面を取得するためにCalorieViewControllerで型キャスト。timeにCalorieViewCfontrollerのtimeを代入
+        guard let sourceVC2 = sender.source as? CalorieViewController, let time = sourceVC2.time else {//汚い
             return
         }
         //userDefaultsをsumに読み込み
@@ -38,12 +63,25 @@ class ViewController: UIViewController, UITableViewDelegate {
         //calorieLabelにuserDefaultsを表示
         calorieLabel.text = userDefaults.string(forKey: "calorie_value")
         
+        //resetButtonの切り替え
         if  sum == 0 {
             self.resetButton.isEnabled = false
         } else {
             self.resetButton.isEnabled = true
         }
         
+        //kcalをつける
+        let calorieLog = "\(String(getCalorie))kcal"
+        //calorieArrayにcalorieLogを追加
+        calorieArray.append(calorieLog)
+        //userDefaultsにcalorieArrayを保存
+        userDefaults.set(calorieArray, forKey: "calorieArray_value")
+        //timeArrayにtimeを追加
+        timeArray.append(time)
+        //userDefaultsにtimeArrayを保存
+        userDefaults.set(timeArray, forKey: "timeArray_value")
+        //tableViewを更新
+        self.tableView.reloadData()
 
     }
     
@@ -86,6 +124,14 @@ class ViewController: UIViewController, UITableViewDelegate {
             self.progressBar.setProgress( self.progress , animated: true)
             self.calorieLabel.textColor = UIColor.black
             
+            //それぞれの配列をリセット
+            self.calorieArray = []
+            self.timeArray = []
+            //それぞれの配列をuserDefaultsに保存
+            self.userDefaults.set(self.calorieArray, forKey: "calorieArray_value")
+            self.userDefaults.set(self.timeArray, forKey: "timeArray_value")
+            //tableViewを更新
+            self.tableView.reloadData()
 
         })
         
@@ -108,6 +154,12 @@ class ViewController: UIViewController, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //calorieArrayがからじゃなかったら
+        if self.userDefaults.object(forKey: "calorieArray_value") != nil {
+            self.timeArray = self.userDefaults.stringArray(forKey: "timeArray_value")!
+            self.calorieArray = self.userDefaults.stringArray(forKey: "calorieArray_value")!
+        }
+        
         //デフォルト値を指定
         userDefaults.register(defaults: ["calorie_value" : 0])
         userDefaults.register(defaults: ["goal_value" : 2250])
@@ -127,6 +179,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         } else {
             self.resetButton.isEnabled = true
         }
+    
         
     }
     

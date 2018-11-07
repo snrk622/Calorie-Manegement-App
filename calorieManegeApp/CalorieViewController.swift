@@ -13,6 +13,7 @@ class CalorieViewController: UIViewController {
     let userDefaults = UserDefaults.standard
 
     var getCalorie: UInt16?
+    var time: String?
     
     @IBOutlet weak var calorieTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -47,8 +48,16 @@ class CalorieViewController: UIViewController {
             return
         }
         
+        func getNowClockString() -> String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm:ss"
+            let now = Date()
+            return formatter.string(from: now)
+        }
+        
         //getCalorieにcalorieTextFieldのtextを代入
-        getCalorie = UInt16(calorieTextField.text!)
+        getCalorie = UInt16(calorieTextField.text ?? "")
+        time = getNowClockString()
         
     }
     
