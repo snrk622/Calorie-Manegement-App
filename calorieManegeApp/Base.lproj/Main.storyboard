@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbi-pW-Ab8">
                                 <rect key="frame" x="0.0" y="88" width="414" height="162"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJC-Vs-dto">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJC-Vs-dto">
                                         <rect key="frame" x="150.66666666666666" y="20" width="112.99999999999997" height="57"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="48"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -33,13 +33,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLc-aQ-zmH">
-                                        <rect key="frame" x="171.66666666666666" y="92" width="5" height="20"/>
+                                        <rect key="frame" x="171.66666666666666" y="87" width="5" height="20"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="igJ-8x-gPL">
-                                        <rect key="frame" x="181.66666666666666" y="87" width="51" height="33"/>
+                                        <rect key="frame" x="181.66666666666666" y="87" width="51" height="23"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="Button">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,11 +48,11 @@
                                             <segue destination="IFV-gd-nY8" kind="presentation" identifier="addGoal" id="KgF-l5-CWc"/>
                                         </connections>
                                     </button>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="N6F-VH-fGM">
-                                        <rect key="frame" x="90" y="140" width="234" height="2"/>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="N6F-VH-fGM">
+                                        <rect key="frame" x="90" y="130" width="234" height="2"/>
                                     </progressView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kcal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acb-mU-2D7">
-                                        <rect key="frame" x="237.66666666666666" y="100" width="29.999999999999972" height="12"/>
+                                        <rect key="frame" x="237.66666666666666" y="95" width="29.999999999999972" height="12"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="v4X-9e-JrV"/>
                                         </constraints>
@@ -63,9 +63,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.066666666669999999" green="0.066666666669999999" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="acb-mU-2D7" firstAttribute="top" secondItem="HJC-Vs-dto" secondAttribute="bottom" constant="23" id="6tp-7j-Z5T"/>
+                                    <constraint firstItem="acb-mU-2D7" firstAttribute="top" secondItem="HJC-Vs-dto" secondAttribute="bottom" constant="18" id="6tp-7j-Z5T"/>
                                     <constraint firstItem="acb-mU-2D7" firstAttribute="leading" secondItem="igJ-8x-gPL" secondAttribute="trailing" constant="5" id="ACe-ST-h0f"/>
-                                    <constraint firstAttribute="bottom" secondItem="N6F-VH-fGM" secondAttribute="bottom" constant="20" id="Cbr-X1-1nb"/>
+                                    <constraint firstAttribute="bottom" secondItem="N6F-VH-fGM" secondAttribute="bottom" constant="30" id="Cbr-X1-1nb"/>
                                     <constraint firstItem="HJC-Vs-dto" firstAttribute="centerX" secondItem="qbi-pW-Ab8" secondAttribute="centerX" id="GTZ-d6-fKS"/>
                                     <constraint firstItem="HJC-Vs-dto" firstAttribute="top" secondItem="qbi-pW-Ab8" secondAttribute="top" constant="20" id="LHM-c9-Hqs"/>
                                     <constraint firstItem="igJ-8x-gPL" firstAttribute="top" secondItem="HJC-Vs-dto" secondAttribute="bottom" constant="10" id="Q9g-Rj-cPr"/>
@@ -77,7 +77,7 @@
                                     <constraint firstItem="N6F-VH-fGM" firstAttribute="centerX" secondItem="igJ-8x-gPL" secondAttribute="centerX" id="oD5-xM-DFI"/>
                                     <constraint firstItem="igJ-8x-gPL" firstAttribute="centerX" secondItem="qbi-pW-Ab8" secondAttribute="centerX" id="rku-nr-tJA"/>
                                     <constraint firstItem="StA-8P-1R7" firstAttribute="leading" secondItem="HJC-Vs-dto" secondAttribute="trailing" constant="10" id="tV1-oH-584"/>
-                                    <constraint firstItem="vLc-aQ-zmH" firstAttribute="top" secondItem="HJC-Vs-dto" secondAttribute="bottom" constant="15" id="z2I-m5-Gcg"/>
+                                    <constraint firstItem="vLc-aQ-zmH" firstAttribute="top" secondItem="HJC-Vs-dto" secondAttribute="bottom" constant="10" id="z2I-m5-Gcg"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Buy-kf-wNV">

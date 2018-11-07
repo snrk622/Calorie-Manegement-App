@@ -218,12 +218,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             progressBar.progressTintColor = UIColor(red: 255/255, green: 127/255, blue: 127/255, alpha: 1)
         }
         //文字色を変更する
-        if sum >= 2000 {
+        if sum >= goalCalorie {
             calorieLabel.textColor = UIColor(red: 255/255, green: 127/255, blue: 127/255, alpha: 1)
         }
         //progressBar更新
         self.progressBar.setProgress( self.progress , animated: true)
     }
+    
+    // Override to support editing the table view.
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            // Delete the row from the data source
+//            self.timeArray.remove(at: indexPath.row)
+//            self.calorieArray.remove(at: indexPath.row)
+//            userDefaults.set(timeArray, forKey: "time_value")
+//            userDefaults.set(calorieArray, forKey: "calorie_value")
+//            sum = sum - (UInt16(calorieArray[indexPath.row]) ?? 0)
+//            //userDefaultsに新しいsumを保存
+//            userDefaults.set(sum, forKey: "calorie_value")
+//            //calorieLabelにuserDefaultsを表示
+//            calorieLabel.text = userDefaults.string(forKey: "calorie_value")
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
     
 }
 
