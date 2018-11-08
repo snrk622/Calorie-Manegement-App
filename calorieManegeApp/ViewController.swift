@@ -10,8 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return calorieArray.count
@@ -26,16 +24,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.layer.masksToBounds = true
         cell.textLabel!.text = timeArray[indexPath.row]
         cell.detailTextLabel!.text = calorieArray[indexPath.row]
-        
-        
 
         return cell
     }
-    
-    
-    
-    
-    
     
     //userDfaultsのインスタンスを取得
     let userDefaults = UserDefaults.standard
@@ -45,19 +36,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var timeArray = [String]()
     var calorieArray = [String]()
     
-    
     @IBOutlet weak var calorieLabel: UILabel!
     @IBOutlet weak var resetButton: UIBarButtonItem!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var goalButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
-//    @IBOutlet weak var cellView: UIView!
-//    @IBOutlet weak var titleLabel: UILabel!
-//    @IBOutlet weak var detailLabel: UILabel!
-    
-    
-    
-    
+
     //CalorieViewControllerlからsegueを巻き戻したときの処理
     @IBAction func unwindTotop(sender: UIStoryboardSegue) {
         //遷移元の画面を取得するためにCalorieViewControllerで型キャスト。getCalorieにCalorieViewCfontrollerのgetCalorieを代入
@@ -224,23 +208,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         //progressBar更新
         self.progressBar.setProgress( self.progress , animated: true)
     }
-    
-    // Override to support editing the table view.
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            // Delete the row from the data source
-//            self.timeArray.remove(at: indexPath.row)
-//            self.calorieArray.remove(at: indexPath.row)
-//            userDefaults.set(timeArray, forKey: "time_value")
-//            userDefaults.set(calorieArray, forKey: "calorie_value")
-//            sum = sum - (UInt16(calorieArray[indexPath.row]) ?? 0)
-//            //userDefaultsに新しいsumを保存
-//            userDefaults.set(sum, forKey: "calorie_value")
-//            //calorieLabelにuserDefaultsを表示
-//            calorieLabel.text = userDefaults.string(forKey: "calorie_value")
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
     
 }
 
